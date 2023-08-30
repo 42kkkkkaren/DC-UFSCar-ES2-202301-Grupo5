@@ -363,7 +363,7 @@ public class BibEntry {
             throw new IllegalArgumentException("The field name '" + name + "' is reserved");
         }
 
-        if (fieldName == "year") {
+        if (fieldName.equals("year")) {
 
             int AnoInput;
             int AnoAtual;
@@ -395,10 +395,10 @@ public class BibEntry {
 
         if (fieldName.equals("bibtexkey")) {
 	            if (value.length() < 2) {
-	                throw new IllegalArgumentException("The key field must contain at least two characters");
+	                throw new IllegalArgumentException("O campo Key deve conter no mínimo 2 caracteres");
 	            }
 	            if (!Character.isLetter(value.charAt(0))) {
-	                throw new IllegalArgumentException("The key field must contain a letter on the first character");
+	                throw new IllegalArgumentException("O campo Key deve conter pelo menos uma letra como primeiro caracter");
 	            }
 	
 	        }
