@@ -363,6 +363,46 @@ public class BibEntry {
             throw new IllegalArgumentException("The field name '" + name + "' is reserved");
         }
 
+        if (fieldName.equals("year")) {
+
+            int AnoInput;
+            int AnoAtual;
+
+            // Verificando se o ano de entrada e inteiro
+            try {
+                AnoInput = Integer.parseInt(value);
+            } catch (NumberFormatException nfe) {
+                fields.put(fieldName, "");
+                throw new IllegalArgumentException(
+                        "O campo Ano não aceita valores não inteiros! Por favor, digite novamente");
+            }
+
+            // Verificando se o ano de entrada e negativo
+            if (AnoInput < 0) {
+                fields.put(fieldName, "");
+                throw new IllegalArgumentException(
+                        "O campo Ano não aceita um número inteiro negativo. Por favor digite novamente");
+            }
+
+            // Verificando se o ano inserido e maior que o atual
+            AnoAtual = Calendar.getInstance().get(Calendar.YEAR);
+            if (AnoInput > AnoAtual) {
+                fields.put(fieldName, "");
+                throw new IllegalArgumentException("O campo Ano não aceita um número inteiro maior que o ano de " + AnoAtual);
+            }
+
+        }
+
+        if (fieldName.equals("bibtexkey")) {
+	            if (value.length() < 2) {
+	                throw new IllegalArgumentException("O campo Key deve conter no mínimo 2 caracteres");
+	            }
+	            if (!Character.isLetter(value.charAt(0))) {
+	                throw new IllegalArgumentException("O campo Key deve conter pelo menos uma letra como primeiro caracter");
+	            }
+	
+	        }
+
         changed = true;
 
         String oldValue = fields.get(fieldName);
